@@ -35,7 +35,19 @@
 	}
 
 	function downScale(array){
-		
+		let smallArray = new Uint32Array(64);
+		let finalArray = new Uint8Array(64);
+		for(let i = 0; i < board.width; i+=3){
+			for(let j = 0; j < board.height; j+=3){
+				if(array[i*board.width + j] != 0){
+					smallArray[Math.floor(i/15) *64 + Math.floor(j/15)]++;
+				}
+			}
+		}
+		for(let k = 0; k < smallArray.length; k++){
+			finalArray[k] = (smallArray[k] > 12)? 1 : 0;
+		}
+		return finalArray;
 	}
 
 
